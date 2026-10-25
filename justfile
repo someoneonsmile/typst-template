@@ -13,4 +13,4 @@ watch file="":
 # 编译所有文书
 all:
     mkdir -p out
-    find business -path '*/template/*.typ' -print | while read -r f; do typst compile --root . "$f" "out/$(basename "$f" .typ).pdf"; done
+    find src/business -path '*/template/*.typ' -print | while read -r f; do typst compile --root . "$f" "out/$(basename "$f" .typ).pdf"; done

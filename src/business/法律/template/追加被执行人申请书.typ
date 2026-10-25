@@ -1,7 +1,7 @@
 // 追加被执行人申请书
 // 复制本文件新建一案，只改「案件信息」和正文。
-#import "/business/法律/lib/layout.typ": document-layout
-#import "/business/法律/lib/components.typ": 当事人, 请求事项, 此致, 落款, 附件
+#import "/src/business/法律/lib/layout.typ": document-layout
+#import "/src/business/法律/lib/components.typ": 当事人, 请求事项, 此致, 落款, 附件
 
 #show: document-layout.with(title: "追加被执行人申请书")
 

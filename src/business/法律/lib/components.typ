@@ -1,6 +1,6 @@
 // 法律领域共用组件。
-#import "/lib/spacing.typ": adaptive-gap
-#import "/business/法律/lib/layout.typ": heiti
+#import "/src/lib/spacing.typ": adaptive-gap
+#import "/src/business/法律/lib/layout.typ": heiti
 
 // 当事人信息行（顶格）
 #let 当事人(标签, 内容) = {

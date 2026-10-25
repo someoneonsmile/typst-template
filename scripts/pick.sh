@@ -16,10 +16,10 @@ while IFS= read -r f; do
     if [[ "$f" == */template/*.typ ]]; then
         files+=("$f")
     fi
-done < <(fd --type f --extension typ . business | sort)
+done < <(fd --type f --extension typ . src/business | sort)
 
 if [[ ${#files[@]} -eq 0 ]]; then
-    echo "business/ 下没有找到任何 .typ 文书" >&2
+    echo "src/business/ 下没有找到任何 .typ 文书" >&2
     exit 1
 fi
 
