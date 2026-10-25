@@ -32,12 +32,27 @@ just build            # 不带关键词时用 fzf 选择文书
 just build 追加        # 按关键词编译文书到 out/
 just watch 追加        # 按关键词监听文书
 just all              # 编译所有 template/ 下的文书
+just export 追加       # 导出自包含单文件到 out/
+just export 追加 ~/我的申请书.typ   # 或指定输出路径
 ```
 
 关键词按 fzf 的模糊规则匹配 `src/business/**/template/*.typ`，只输部分文件名即可；
 不输关键词时直接弹出全部文书供选择，命中多份时也会弹出列表，也可以直接传入完整路径。
 
 产物写入 `out/`，不纳入版本控制；该目录由构建命令自动创建。
+
+## 导出单文件
+
+`just export [关键词] [输出文件]` 把一份文书及其依赖的版式、组件展开成一个自包含的 `.typ`，
+默认写到 `out/<文书名>.typ`：
+
+```bash
+just export 追加
+just export 追加 ~/Documents/我的申请书.typ
+```
+
+导出件里没有项目内 `import`，拷到任意目录后直接 `typst compile 文件名.typ` 即可，
+不需要本项目目录，也不需要 `--root .`。源文书改动后重新导出即可更新。
 
 ## 新建文书
 
