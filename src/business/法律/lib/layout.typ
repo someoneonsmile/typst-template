@@ -72,7 +72,7 @@
     sticky: true,
     inset: (left: 2em),
   )[
-    #set text(font: fangsong, size: 12pt, weight: "bold")
+    #set text(font: heiti, size: 12pt, weight: "bold")
     #set align(left)
     #set par(first-line-indent: 0pt)
     #set block(above: 0pt, below: 0pt)
