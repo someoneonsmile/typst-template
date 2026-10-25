@@ -21,15 +21,20 @@ business/法律/
 ## 依赖
 
 - Typst 0.15+
+- [just](https://github.com/casey/just)、[fd](https://github.com/sharkdp/fd)、[fzf](https://github.com/junegunn/fzf)
 - 字体：FangSong（仿宋）、SimHei（黑体）。macOS 可在 `business/法律/lib/layout.typ` 中改成 `STFangsong` / `Heiti SC`。
 
 ## 使用
 
 ```bash
-just build 路径.typ    # 编译指定文书到 out/
-just watch 路径.typ    # 监听指定文书
+just build            # 不带关键词时用 fzf 选择文书
+just build 追加        # 按关键词编译文书到 out/
+just watch 追加        # 按关键词监听文书
 just all              # 编译所有 template/ 下的文书
 ```
+
+关键词按 fzf 的模糊规则匹配 `business/**/template/*.typ`，只输部分文件名即可；
+不输关键词时直接弹出全部文书供选择，命中多份时也会弹出列表，也可以直接传入完整路径。
 
 产物写入 `out/`，不纳入版本控制；该目录由构建命令自动创建。
 

@@ -1,12 +1,14 @@
-# 编译单份文书：just build 文件
-build file:
-    mkdir -p out
-    typst compile --root . {{file}} "out/$(basename "{{file}}" .typ).pdf"
+# 编译单份文书：just build [文件名关键词]
+build file="":
+    @target=$(./scripts/pick.sh "{{file}}") && \
+    mkdir -p out && \
+    typst compile --root . "$target" "out/$(basename "$target" .typ).pdf"
 
-# 监听单份文书：just watch 文件
-watch file:
-    mkdir -p out
-    typst watch --root . {{file}} "out/$(basename "{{file}}" .typ).pdf"
+# 监听单份文书：just watch [文件名关键词]
+watch file="":
+    @target=$(./scripts/pick.sh "{{file}}") && \
+    mkdir -p out && \
+    typst watch --root . "$target" "out/$(basename "$target" .typ).pdf"
 
 # 编译所有文书
 all:
