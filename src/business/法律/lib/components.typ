@@ -20,12 +20,23 @@
   #机关
 ])
 
-// 落款：申请人、日期留空时保留手写或盖章位置
-#let 落款(申请人: none, 日期: none) = adaptive-gap(min-gap: 1em, max-gap: 1.5em, block(breakable: false, width: 100%)[
+// 落款：申请人、日期留空时保留手写或盖章位置；章为印章图片路径，压在两行落款上
+#let 落款(申请人: none, 日期: none, 章: none) = adaptive-gap(min-gap: 1em, max-gap: 1.5em, block(breakable: false, width: 100%)[
   #set par(first-line-indent: 0pt)
   #set align(right)
-  申请人：#if 申请人 == none { h(7em) } else { 申请人 }\
-  日期：#if 日期 == none { [#h(2.6em)年#h(1.2em)月#h(1.2em)日] } else { 日期 }
+  #let 内容 = [
+    申请人：#if 申请人 == none { h(7em) } else { 申请人 }\
+    日期：#if 日期 == none { [#h(2.6em)年#h(1.2em)月#h(1.2em)日] } else { 日期 }
+  ]
+  #if 章 == none {
+    内容
+  } else {
+    block(width: auto)[
+      // 公章标准直径 4.2cm，中心与落款两行中线对齐，盖住日期
+      #place(center + horizon, image(章, width: 4.2cm))
+      #内容
+    ]
+  }
 ])
 
 // 附件：编号列表；标签固定黑体
