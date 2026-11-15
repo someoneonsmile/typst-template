@@ -53,7 +53,7 @@ just export 追加 ~/Documents/我的申请书  # 或指定合并导出的目录
 
 合并导出把文书及其 `.typ` 依赖展开成单个 `<文书名>.typ`；不合并导出保留文书、依赖源码和
 资源完整的 `src/...` 目录层级。两种方式都会复制引用到的项目资产，并按目录层级合并沿途的
-`GEN-AGENTS.md` 生成 `AGENTS.md`。
+`AGENTS.fragment.md` 生成 `AGENTS.md`。
 
 合并导出可以直接编译：
 
@@ -69,7 +69,7 @@ cd out/追加被执行人申请书-unmerged
 just build
 ```
 
-源文书、依赖或 `GEN-AGENTS.md` 改动后重新导出即可更新。
+源文书、依赖或 `AGENTS.fragment.md` 改动后重新导出即可更新。
 
 ## 新建文书
 

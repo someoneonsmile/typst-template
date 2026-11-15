@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 导出文书及沿途各层的 GEN-AGENTS.md。
+# 导出文书及沿途各层的 AGENTS.fragment.md。
 # 合并模式把依赖展开进单个 .typ；不合并模式保留文书的原始目录层级。
 # 用法：scripts/export.sh <merged|unmerged> <文书路径> <输出目录>
 set -euo pipefail
@@ -91,7 +91,7 @@ if [[ "$merged_out" == "$root$rel" || "$unmerged_out" == "$root$rel" ]]; then
     exit 1
 fi
 
-# 按目录层级收集 GEN-AGENTS.md，父层在前、子层在后。
+# 按目录层级收集 AGENTS.fragment.md，父层在前、子层在后。
 agent_parts=()
 target_dir="${rel%/*}"
 if [[ "$target_dir" == /src/business/* || "$target_dir" == /src/business ]]; then
@@ -100,7 +100,7 @@ if [[ "$target_dir" == /src/business/* || "$target_dir" == /src/business ]]; the
     for part in "${target_parts[@]}"; do
         current="$current/$part"
         [[ "$current" == /src/business || "$current" == /src/business/* ]] || continue
-        candidate="$root$current/GEN-AGENTS.md"
+        candidate="$root$current/AGENTS.fragment.md"
         if [[ -f "$candidate" ]]; then
             agent_parts+=("$candidate")
         fi
