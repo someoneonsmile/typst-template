@@ -10,11 +10,17 @@ watch file="":
     mkdir -p out && \
     typst watch --root . "$target" "out/$(basename "$target" .typ).pdf"
 
-# 导出自包含单文件：just export [文书关键词] [输出文件]
+# 合并导出自包含单文件及 AGENTS.md：just export [文书关键词] [输出目录]
 export file="" out="":
     @target=$(./scripts/pick.sh "{{file}}") && \
-    if [ -z "{{out}}" ]; then out="out/$(basename "$target" .typ).typ"; else out="{{out}}"; fi && \
-    ./scripts/export.sh "$target" "$out"
+    if [ -z "{{out}}" ]; then out="out/$(basename "$target" .typ)"; else out="{{out}}"; fi && \
+    ./scripts/export.sh merged "$target" "$out"
+
+# 不合并导出文书、依赖源码及 AGENTS.md：just export-unmerged [文书关键词] [输出目录]
+export-unmerged file="" out="":
+    @target=$(./scripts/pick.sh "{{file}}") && \
+    if [ -z "{{out}}" ]; then out="out/$(basename "$target" .typ)-unmerged"; else out="{{out}}"; fi && \
+    ./scripts/export.sh unmerged "$target" "$out"
 
 # 编译所有文书
 all:

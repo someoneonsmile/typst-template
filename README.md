@@ -32,8 +32,8 @@ just build            # 不带关键词时用 fzf 选择文书
 just build 追加        # 按关键词编译文书到 out/
 just watch 追加        # 按关键词监听文书
 just all              # 编译所有 template/ 下的文书
-just export 追加       # 导出自包含单文件到 out/
-just export 追加 ~/我的申请书.typ   # 或指定输出路径
+just export 追加       # 合并导出到 out/追加被执行人申请书/
+just export-unmerged 追加  # 不合并导出到 out/追加被执行人申请书-unmerged/
 ```
 
 关键词按 fzf 的模糊规则匹配 `src/business/**/template/*.typ`，只输部分文件名即可；
@@ -41,18 +41,35 @@ just export 追加 ~/我的申请书.typ   # 或指定输出路径
 
 产物写入 `out/`，不纳入版本控制；该目录由构建命令自动创建。
 
-## 导出单文件
+## 导出目录
 
-`just export [关键词] [输出文件]` 把一份文书及其依赖的版式、组件展开成一个自包含的 `.typ`，
-默认写到 `out/<文书名>.typ`：
+导出支持合并与不合并两种方式，第二个参数均表示输出目录。
 
 ```bash
-just export 追加
-just export 追加 ~/Documents/我的申请书.typ
+just export 追加                      # 合并依赖，输出到 out/<文书名>/
+just export-unmerged 追加             # 保留文件层级，输出到 out/<文书名>-unmerged/
+just export 追加 ~/Documents/我的申请书  # 或指定合并导出的目录
 ```
 
-导出件里没有项目内 `import`，拷到任意目录后直接 `typst compile 文件名.typ` 即可，
-不需要本项目目录，也不需要 `--root .`。源文书改动后重新导出即可更新。
+合并导出把文书及其 `.typ` 依赖展开成单个 `<文书名>.typ`；不合并导出保留文书、依赖源码和
+资源完整的 `src/...` 目录层级。两种方式都会复制引用到的项目资产，并按目录层级合并沿途的
+`GEN-AGENTS.md` 生成 `AGENTS.md`。
+
+合并导出可以直接编译：
+
+```bash
+cd out/追加被执行人申请书
+typst compile 追加被执行人申请书.typ
+```
+
+不合并导出保留根相对路径，并生成适配当前目录包的单文书 `justfile`：
+
+```bash
+cd out/追加被执行人申请书-unmerged
+just build
+```
+
+源文书、依赖或 `GEN-AGENTS.md` 改动后重新导出即可更新。
 
 ## 新建文书
 
