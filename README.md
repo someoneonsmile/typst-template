@@ -97,6 +97,6 @@ src/business/法律/执行/
 #import "/src/business/法律/执行/lib/layout.typ": document-layout
 ```
 
-法律领域组件（当事人、请求事项、此致、落款、附件）从
+法律领域组件（当事人、请求事项、此致、附件、落款）从
 `/src/business/法律/lib/components.typ` 引入，业务通用组件从
 `/src/business/lib/components.typ` 引入。

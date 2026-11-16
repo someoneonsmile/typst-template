@@ -40,10 +40,13 @@
 ])
 
 // 附件：编号列表；标签固定黑体
-#let 附件(body) = adaptive-gap(min-gap: 0em, max-gap: 2em, block(breakable: false)[
-  #set par(first-line-indent: 0pt)
-  #set enum(numbering: "1.", indent: 0em, body-indent: 0.5em)
-  #text(font: heiti)[附：]
-  #v(0.35em)
-  #body
-])
+// 「附：」与首项同页；整块粘住其后的落款，避免落款孤页；附项多时可跨页
+#let 附件(body) = block(sticky: true)[
+  #adaptive-gap(min-gap: 0em, max-gap: 2em)[
+    #set par(first-line-indent: 0pt)
+    #set enum(numbering: "1.", indent: 0em, body-indent: 0.5em)
+    #block(sticky: true)[#text(font: heiti)[附：]]
+    #v(0.35em)
+    #body
+  ]
+]
